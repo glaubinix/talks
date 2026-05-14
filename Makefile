@@ -11,7 +11,7 @@ THEMES     := $(wildcard $(THEMES_DIR)/*.css)
 
 MARP := npx --yes @marp-team/marp-cli@latest
 
-.PHONY: help all assets watch pdf index clean
+.PHONY: help all assets watch pdf index serve clean
 
 help: ## Show this help
 	@echo "Usage: make <target>"
@@ -64,6 +64,9 @@ pdf: $(PDF_FILES) ## Build PDF versions of all talks into build/pdf/
 $(BUILD_DIR)/$(PDF_DIR)/%.pdf: $(TALKS_DIR)/%.md $(THEMES)
 	@mkdir -p $(dir $@)
 	$(MARP) --pdf --allow-local-files --html --theme-set $(THEMES_DIR) --output $@ $<
+
+serve: ## Serve the build folder at http://localhost:8888/
+	cd $(BUILD_DIR) && php -S 0.0.0.0:8888
 
 clean: ## Remove the build folder
 	rm -rf $(BUILD_DIR)

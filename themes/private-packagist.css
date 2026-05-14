@@ -32,7 +32,14 @@ section {
     color: var(--pp-black);
     background: var(--pp-white);
     padding: 70px 80px 90px;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
+}
+
+/* Split-background slides: keep content vertically centered next to the image */
+section[data-marpit-advanced-background="content"] {
+    justify-content: center;
 }
 
 /* Brand accent bar at the bottom of every slide */
@@ -291,7 +298,6 @@ section.lead::after {
 section.section {
     background: var(--pp-orange);
     color: var(--pp-white);
-    justify-content: center;
     text-align: left;
 }
 
