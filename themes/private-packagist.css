@@ -1,0 +1,387 @@
+/* @theme private-packagist */
+/*
+ * Private Packagist brand theme for Marp.
+ * Colors and typography match manager/web/scss/vendors/_settings.scss and
+ * the public brand-assets page (packagist.com/about/brand-assets).
+ */
+
+@import 'default';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&family=Inconsolata:wght@400;600&display=swap');
+
+:root {
+    --pp-orange: #c15934;
+    --pp-orange-light: #e0743f;
+    --pp-orange-lightest: #e58b59;
+    --pp-orange-darker: #a74d2d;
+    --pp-brown: #7d4a36;
+    --pp-black: #0a0a0a;
+    --pp-white: #ffffff;
+    --pp-gray-lightest: #fafafa;
+    --pp-gray-lighter: #f5f5f5;
+    --pp-gray-light: #f0f0f0;
+
+    --pp-font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --pp-font-mono: 'Inconsolata', 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+section {
+    font-family: var(--pp-font-body);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--pp-black);
+    background: var(--pp-white);
+    padding: 70px 80px 90px;
+    justify-content: flex-start;
+}
+
+/* Brand accent bar at the bottom of every slide */
+section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(
+        90deg,
+        var(--pp-orange) 0%,
+        var(--pp-orange-light) 55%,
+        var(--pp-orange-lightest) 100%
+    );
+}
+
+/* Headings */
+section h1,
+section h2,
+section h3,
+section h4 {
+    font-family: var(--pp-font-body);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 0.5em;
+}
+
+section h1 {
+    color: var(--pp-orange);
+    font-size: 1.7em;
+    padding-bottom: 0.2em;
+    border-bottom: 3px solid var(--pp-orange-light);
+}
+
+section h2 {
+    color: var(--pp-orange-darker);
+    font-size: 1.25em;
+}
+
+section h3 {
+    color: var(--pp-black);
+    font-size: 1.05em;
+}
+
+section h4 {
+    color: var(--pp-brown);
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+section p {
+    margin: 0 0 0.6em;
+}
+
+section strong {
+    color: var(--pp-orange-darker);
+    font-weight: 700;
+}
+
+section em {
+    color: var(--pp-brown);
+}
+
+/* Links */
+section a {
+    color: var(--pp-orange);
+    text-decoration: none;
+    border-bottom: 1px solid var(--pp-orange-lightest);
+}
+
+section a:hover {
+    color: var(--pp-orange-darker);
+    border-bottom-color: var(--pp-orange-darker);
+}
+
+/* Inline code */
+section code {
+    font-family: var(--pp-font-mono);
+    font-size: 0.92em;
+    background: var(--pp-gray-lightest);
+    color: var(--pp-orange-darker);
+    padding: 0.08em 0.35em;
+    border-radius: 3px;
+    border: 1px solid var(--pp-gray-light);
+}
+
+/* Fenced code blocks */
+section pre {
+    background: var(--pp-gray-lightest);
+    border-left: 4px solid var(--pp-orange);
+    border-radius: 4px;
+    padding: 0.9em 1.1em;
+    font-size: 0.78em;
+    line-height: 1.45;
+    overflow: auto;
+}
+
+section pre code {
+    background: transparent;
+    border: 0;
+    color: var(--pp-black);
+    padding: 0;
+}
+
+/* Blockquote */
+section blockquote {
+    margin: 0.6em 0;
+    padding: 0.7em 1.1em;
+    background: var(--pp-gray-lightest);
+    border-left: 4px solid var(--pp-orange-light);
+    color: var(--pp-brown);
+    font-style: italic;
+}
+
+section blockquote > :last-child {
+    margin-bottom: 0;
+}
+
+/* Lists */
+section ul,
+section ol {
+    margin: 0 0 0.6em;
+    padding-left: 1.4em;
+}
+
+section li {
+    margin: 0.15em 0;
+}
+
+section ul > li::marker {
+    color: var(--pp-orange);
+}
+
+section ol > li::marker {
+    color: var(--pp-orange);
+    font-weight: 600;
+}
+
+/* Tables */
+section table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+}
+
+section th {
+    background: var(--pp-orange);
+    color: var(--pp-white);
+    text-align: left;
+    padding: 0.45em 0.8em;
+    font-weight: 600;
+}
+
+section td {
+    padding: 0.45em 0.8em;
+    border-bottom: 1px solid var(--pp-gray-light);
+}
+
+section tr:nth-child(even) td {
+    background: var(--pp-gray-lightest);
+}
+
+/* Horizontal rule */
+section hr {
+    border: 0;
+    height: 2px;
+    background: var(--pp-gray-light);
+    margin: 0.8em 0;
+}
+
+/* Marp directives: header, footer, slide number */
+section > header {
+    color: var(--pp-brown);
+    font-size: 0.55em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    top: 28px;
+    left: 80px;
+    right: 80px;
+}
+
+section > footer {
+    color: var(--pp-brown);
+    font-size: 0.55em;
+    bottom: 24px;
+    left: 80px;
+    right: 80px;
+}
+
+section::after {
+    color: var(--pp-orange-darker);
+    font-weight: 600;
+    font-size: 0.55em;
+    bottom: 22px;
+    right: 80px;
+}
+
+/* ===========================================================
+ * Title / lead slide: use with <!-- _class: lead -->
+ * =========================================================== */
+section.lead {
+    background: var(--pp-gray-lightest);
+    padding: 90px 110px 110px;
+    justify-content: center;
+}
+
+section.lead h1 {
+    font-size: 3em;
+    line-height: 1.1;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0.25em;
+    color: var(--pp-orange);
+}
+
+section.lead h2 {
+    color: var(--pp-black);
+    font-weight: 400;
+    font-size: 1.3em;
+    margin: 0 0 1.2em;
+}
+
+section.lead h3,
+section.lead p {
+    color: var(--pp-brown);
+    font-size: 0.95em;
+    margin: 0.15em 0;
+}
+
+/* Title-slide accent: a thicker top bar in addition to the bottom one */
+section.lead::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: linear-gradient(
+        90deg,
+        var(--pp-orange-darker) 0%,
+        var(--pp-orange) 40%,
+        var(--pp-orange-light) 80%,
+        var(--pp-orange-lightest) 100%
+    );
+    color: transparent;
+}
+
+/* ===========================================================
+ * Section divider: use with <!-- _class: section -->
+ * Big orange background, white text — for chapter breaks.
+ * =========================================================== */
+section.section {
+    background: var(--pp-orange);
+    color: var(--pp-white);
+    justify-content: center;
+    text-align: left;
+}
+
+section.section h1 {
+    color: var(--pp-white);
+    font-size: 2.6em;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 0.2em;
+}
+
+section.section h2 {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+}
+
+section.section::before {
+    background: linear-gradient(
+        90deg,
+        var(--pp-orange-darker) 0%,
+        var(--pp-orange) 100%
+    );
+}
+
+section.section::after {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===========================================================
+ * Dark slide variant: use with <!-- _class: invert -->
+ * =========================================================== */
+section.invert {
+    background: var(--pp-black);
+    color: var(--pp-white);
+}
+
+section.invert h1 {
+    color: var(--pp-orange-light);
+    border-bottom-color: var(--pp-orange);
+}
+
+section.invert h2 {
+    color: var(--pp-orange-lightest);
+}
+
+section.invert h3 {
+    color: var(--pp-white);
+}
+
+section.invert a {
+    color: var(--pp-orange-light);
+}
+
+section.invert code {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--pp-orange-lightest);
+}
+
+section.invert pre {
+    background: #1a1a1a;
+    border-left-color: var(--pp-orange);
+}
+
+section.invert pre code {
+    color: var(--pp-gray-light);
+}
+
+section.invert blockquote {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--pp-gray-light);
+    border-left-color: var(--pp-orange-light);
+}
+
+section.invert th {
+    background: var(--pp-orange);
+}
+
+section.invert tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+section.invert td {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+section.invert > header,
+section.invert > footer {
+    color: var(--pp-gray-light);
+}
+
+section.invert::after {
+    color: var(--pp-orange-light);
+}
