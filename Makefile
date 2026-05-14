@@ -5,7 +5,7 @@ BUILD_DIR  := build
 PDF_DIR    := pdf
 
 MD_FILES   := $(wildcard $(TALKS_DIR)/*.md)
-HTML_FILES := $(patsubst $(TALKS_DIR)/%.md,$(BUILD_DIR)/$(TALKS_DIR)/%.html,$(MD_FILES))
+HTML_FILES := $(patsubst $(TALKS_DIR)/%.md,$(BUILD_DIR)/%.html,$(MD_FILES))
 PDF_FILES  := $(patsubst $(TALKS_DIR)/%.md,$(BUILD_DIR)/$(PDF_DIR)/%.pdf,$(MD_FILES))
 THEMES     := $(wildcard $(THEMES_DIR)/*.css)
 
@@ -19,27 +19,26 @@ help: ## Show this help
 	@echo "Targets:"
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-10s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 	@echo
-	@echo "Inputs:  $(TALKS_DIR)/*.md, $(THEMES_DIR)/*.css, $(ASSETS_DIR)/*"
-	@echo "Output:  $(BUILD_DIR)/$(TALKS_DIR)/*.html + $(BUILD_DIR)/$(ASSETS_DIR)/* (PDFs in $(BUILD_DIR)/$(PDF_DIR)/)"
+	@echo "Inputs:  $(TALKS_DIR)/*.md, $(THEMES_DIR)/*.css, $(TALKS_DIR)/$(ASSETS_DIR)/*"
+	@echo "Output:  $(BUILD_DIR)/*.html + $(BUILD_DIR)/$(ASSETS_DIR)/* (PDFs in $(BUILD_DIR)/$(PDF_DIR)/)"
 
 all: $(HTML_FILES) assets ## Build all talks and copy referenced assets
 
-$(BUILD_DIR)/$(TALKS_DIR)/%.html: $(TALKS_DIR)/%.md $(THEMES)
+$(BUILD_DIR)/%.html: $(TALKS_DIR)/%.md $(THEMES)
 	@mkdir -p $(dir $@)
 	$(MARP) --html --theme-set $(THEMES_DIR) --output $@ $<
 
 assets: $(MD_FILES) ## Copy assets referenced by talks into the build folder
 	@mkdir -p $(BUILD_DIR)/$(ASSETS_DIR)
-	@grep -hoE '\.\./$(ASSETS_DIR)/[A-Za-z0-9._/-]+' $(MD_FILES) \
+	@grep -hoE '$(ASSETS_DIR)/[A-Za-z0-9._/-]+' $(MD_FILES) \
 	  | sort -u \
-	  | sed 's|^\.\./||' \
 	  | while read -r asset; do \
 	      mkdir -p "$(BUILD_DIR)/$$(dirname "$$asset")"; \
-	      cp "$$asset" "$(BUILD_DIR)/$$asset"; \
+	      cp "$(TALKS_DIR)/$$asset" "$(BUILD_DIR)/$$asset"; \
 	    done
 
 watch: ## Serve talks at http://localhost:8080/ with live reload on save
-	$(MARP) --html --theme-set $(THEMES_DIR) --server .
+	$(MARP) --html --theme-set $(THEMES_DIR) --server $(TALKS_DIR)
 
 pdf: $(PDF_FILES) ## Build PDF versions of all talks into build/pdf/
 
